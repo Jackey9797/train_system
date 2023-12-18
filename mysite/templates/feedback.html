@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>反馈</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'pic/scu.ico' %}" sizes="16x16">
+{#    <link rel="shortcutaicon" href="/static/pic">#}
+    <style>
+        .mybtn{
+            text-align: center;
+        }
+        .mycountainer{
+            padding:20px 40px;
+            border:1px solid #dddddd;
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            box-shadow:  10px 10px 30px 5px ;
+            background-color: #fdf5e6;
+        }
+        .navbar {
+            padding-left: 150px;
+            padding-right: 150px;
+            margin-bottom: 0;
+            background-color: #ffffff;
+        }
+        .demo{
+
+                position:fixed;
+
+                top: 0;
+
+                left: 0;
+
+                width:100%;
+
+                height:100%;
+
+                min-width: 1000px;
+
+                z-index:-10;
+
+                zoom: 1;
+
+                background-color: #fff;
+
+                background: url({% static "pic/coolbackground3.png" %});
+
+                background-repeat: no-repeat;
+
+                background-size: cover;
+
+                -webkit-background-size: cover;
+
+                -o-background-size: cover;
+
+                background-position: center 0;
+
+            }
+        body{
+            min-height: 100vh;
+        }
+        footer {
+            color: #fff;
+            padding: 1em 0;
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            background: #72655b;
+            width: 100%;
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="demo"></div>
+<div class="navbar navbar-default" style="font-size: 16px">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'pic/SCU.png' %}" style="width: 30px;">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">首页</a></li>
+                <li><a href="/collection">题目收藏</a></li>
+                <li><a href="/application">入队选拔报名</a></li>
+                <li class="active"><a href="/feedback">反馈 <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <!--{% if username %} {{username}} {%endif%}
+                        -->
+                        <span>
+                            菜单
+                        </span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">个人信息</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+<div class="mycountainer">
+    <h2 style="text-align:center">反馈</h2>
+    <h2></h2>
+    <form>
+        <div>
+            <label>请在此处输入您的建议</label>
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+        <div>
+            <!--{% if message %} {{message}} {% endif %}-->
+        </div>
+        <div class="mybtn">
+            <button type="submit" class="btn btn-primary">提交</button>
+        </div>
+    </form>
+
+</div>
+<footer style="height: 10%;">
+        <p>Copyright © 2023 By <a href="https://scu.edu.cn" title="学校官网" target="_blank">Sichuan University</a>.</p>
+    </footer>
+<script src="{% static 'jQuery.js' %}"></script>
+<script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+
+</body>
+</html>

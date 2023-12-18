@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>乳腺影像检测</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'pic/scu.ico' %}" sizes="16x16">
+
+    <style>
+        .mybtn{
+            text-align: center;
+        }
+
+        .mycountainer{
+            padding:20px 40px;
+            border:1px solid #dddddd;
+            width: 400px;
+            height: 400px;
+            margin: 200px auto;
+            box-shadow: 10px 10px 30px 5px ;
+            background-color: #fdf5e6;
+        }
+        .left{
+            float: left;
+        }
+        .container1{
+            padding:20px 40px;
+            border:1px solid #dddddd;
+            width: 1200px;
+            height: 560px;
+            margin: 50px auto 10px;
+            background-color: #fdf5e6;
+        }
+        .container2{
+            padding:20px 40px;
+            padding-top: 0px;
+            border:1px solid #dddddd;
+            width: 580px;
+            height: 220px;
+            margin-top: 10px;
+            margin-left: 160px;
+            margin-right: 40px;
+            background-color: #fdf5e6;
+        }
+        .container3{
+            padding:10px 40px;
+            padding-top: 0px;
+            border:1px solid #dddddd;
+            width: 580px;
+            height: 220px;
+            margin: 10px auto;
+            background-color: #fdf5e6;
+        }
+        .demo{
+
+                position:fixed;
+
+                top: 0;
+
+                left: 0;
+
+                width:100%;
+
+                height:100%;
+
+                min-width: 1000px;
+
+                z-index:-10;
+
+                zoom: 1;
+
+                background-color: #fff;
+
+                background: url(/static/pic/coolbackground4.png);
+
+                background-repeat: no-repeat;
+
+                background-size: cover;
+
+                -webkit-background-size: cover;
+
+                -o-background-size: cover;
+
+                background-position: center 0;
+
+            }
+
+    </style>
+
+</head>
+<body>
+
+<div class="demo"></div>
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index">
+                 <img src="/static/pic/chest.png" style="width: 40px;">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/index">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/diagnosis">诊断</a></li>
+                <li><a href="/feedback">反馈</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <!--{% if username %} {{username}} {%endif%}
+                        -->
+                        <span>
+                            菜单
+                        </span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">个人信息</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="container1">
+    <h1>乳腺癌简要介绍</h1>
+    <h2>病因</h2>
+    <div>
+        <p style="text-indent: 40px; font-size: 20px">
+            乳腺癌的病因尚不清楚，到目前为止科学家还未找到乳腺癌的确切致癌原因，但已经发现诸多与乳腺癌发病有关的高危因素。随着乳腺癌高危因素不断积聚，其患病风险就会增大。</p>
+    </div>
+    <h3>基本病因</h3>
+    <div>
+        <p style="text-indent: 40px; font-size: 20px">
+            乳腺是多种内分泌激素的靶器官，其中雌酮及雌二醇与乳腺癌的发病有直接关系。月经初潮年龄早（<12岁）、绝经年龄晚（＞55岁）、不孕及初次生育年龄晚（＞30岁）、哺乳时间短、停经后进行雌激素替代疗法等，均可增加或延长体内雌激素的暴露，与乳腺癌发病密切相关。
+            此外，遗传因素也是乳腺癌发病的高危因素。一级亲属（如父母、子女以及兄弟姐妹）中有乳腺癌病史者，发病风险是普通人群的2～3倍。一些基因突变也会增加乳腺癌的患病风险。另外，某些物理因素，如儿童时期接受胸部放射线治疗，也是乳腺癌的致病因素。</p>
+    </div>
+    <h3>诱发因素</h3>
+    <div>
+        <p style="text-indent: 40px; font-size: 20px">
+            除上述高危因素外，尚有一些生活方式与乳腺癌的发病有一定的关系，例如，营养过剩、肥胖、高脂饮食、过度饮酒等会增加乳腺癌的发病率。</p>
+    </div>
+</div>
+<div class="container2 left">
+    <h2>典型症状</h2>
+    <div>
+        <p style="text-indent: 40px; font-size: 20px">
+            目前乳腺癌的常见症状分别有乳房肿块、乳房皮肤异常、乳头乳晕异常、乳头溢液、腋窝淋巴结肿大，可能伴有肺转移、骨转移、肝转移、脑转移等症状</p>
+    </div>
+</div>
+<div class="container3 left">
+    <h2>就医</h2>
+    <div>
+        <p style="text-indent: 40px; font-size: 20px">
+            多数乳腺癌患者早期症状不明显，很容易被忽视而没有及时就医。因此，高危人群应重视乳腺癌的筛查工作，定期进行乳房自我检查及临床体检，一旦发现乳房有肿块、乳头溢液、腋窝淋巴结肿大等异常迹象时，应引起重视，须请专业医生做进一步判断。</p>
+    </div>
+</div>
+<div class="clear:both"></div>
+
+<script src="{% static 'jQuery.js' %}"></script>
+<script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
