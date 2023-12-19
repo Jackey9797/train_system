@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>集训中心</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'pic/scu.ico' %}" sizes="16x16">
+    <link rel="stylesheet" href="{% static 'Picshow.css' %}">
+    <script type="text/javascript" src="{% static 'Picshow.js'%}"></script>
+    <style>
+        .title{
+            height: 500px;
+            background-color: #fffff8;
+        }
+        .reflect{
+            margin-top:20px;
+            margin-left:-1px;
+            color:#666;
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+            height:55px;
+            line-height:34px;
+            font-size:35px;
+            -webkit-box-reflect:below -37px -webkit-gradient(linear,left top,left bottom,from(transparent),color-stop(10%,transparent),to(hsla(0,0%,100%,.3)))}
+        .left{
+            float: left;
+        }
+        .part_1{
+            height: 350px;
+            background-color: #f7f7f7;
+            padding-top: 50px;
+            padding-left: 250px;
+        }
+        .p1_text{
+            font-size: 30px;
+            font-weight: bolder;
+            margin-bottom: 50px;
+        }
+        .p1_text2{
+            font-size: 20px;
+        }
+        .part_2{
+            height: 90px;
+            padding-top: 25px;
+            background-color: #f7f7f7;
+        }
+        .list{
+            height: 120px;
+            width: 300px;
+            box-shadow: 0 1px 5px 0 #c0c0c0;
+        }
+        .container1{
+            padding:20px 40px;
+            width: 1200px;
+            height: 300px;
+            margin: 50px auto 10px;
+        }
+        .container2{
+            padding:20px 40px;
+            padding-top: 0px;
+            width: 580px;
+            height: 220px;
+            margin-top: 10px;
+            margin-left: 160px;
+            margin-right: 40px;
+        }
+        .container3{
+            padding:10px 40px;
+            padding-top: 0px;
+            width: 580px;
+            height: 220px;
+            margin: 10px auto;
+        }
+        .p3_text{
+            font-size: 30px;
+            font-weight: bolder;
+            margin-bottom: 50px;
+        }
+        .p3_list{
+            height: 200px;
+            width: 350px;
+        }
+        .p4_text{
+            font-size: 30px;
+            font-weight: bolder;
+            margin-bottom: 50px;
+        }
+        .navbar {
+            padding-left: 150px;
+            padding-right: 150px;
+            margin-bottom: 0;
+            background-color: #ffffff;
+        }
+        .p5_text{
+            font-size: 25px;
+            font-weight: bold;
+            padding-top: 75px;
+        }
+        .p5_list{
+            height: 300px;
+            width: 300px;
+            background-color: #fffffc;
+        }
+        .p5_list1{
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            padding-top: 50px;
+            margin-left: 30px;
+        }
+        .p5_text1{
+            color: #000030;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .p5_list2{
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            padding-top: 40px;
+            margin-left: 70px;
+        }
+        .p5_text2{
+            font-size: 16px;
+            color: #c0c0c0;
+            padding-left: 10px;
+            padding-right: 5px;
+            padding-top: 20px;
+            line-height: 25px;
+        }
+        .ending{
+            background-color: #333333;
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+        .ending_text{
+            color: #ffffff;
+            font-size: 16px;
+        }
+        body{
+            min-height: 100vh;
+            background-color: rgb(221, 221, 221)
+        }
+        footer {
+            color: #fff;
+            padding: 1em 0;
+            position: relative;
+            bottom: 0;
+            text-align: center;
+            background: #72655b;
+            width: 100%;
+            font-size: 20px;
+        }
+                #box{
+            width: 950px;
+            height: 290px;
+            margin: 0 auto;
+            background: url("/mysite/static/pic/show_pic/show_1.jpg") no-repeat;
+            background-size:contain;
+            transition: all 1s;
+            position: relative;
+        }
+        .icon_left{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 45%;
+            left:20px;
+        }
+        .icon_right{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 45%;
+            right:20px;
+        }
+    </style>
+</head>
+<body>
+{% if username is None %}
+<div class="navbar navbar-default" style="font-size: 16px">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'pic/SCU.png' %}" style="width: 30px;">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home">首页</a></li>
+                <li><a href="/collection">题目收藏</a></li>
+                <li><a href="/application">入队选拔报名</a></li>
+                <li><a href="/feedback">反馈</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register">注册</a></li>
+                <li><a href="/login">登录</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+{% else %}
+<div class="navbar navbar-default" style="font-size: 16px">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'pic/SCU.png' %}" style="width: 30px;">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/collection">题目收藏</a></li>
+                <li><a href="/application">入队选拔报名</a></li>
+                <li><a href="/feedback">反馈</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span>菜单</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_homepage">个人信息</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+{% endif %}
+
+<div class="broadcast" id="broadcast" style=" vertical-align: middle;text-align: center;">
+        <ul id="img_list">
+            <li><img src="{% static 'pic/show_pic/show_1.jpg' %}" alt="1"></li>
+            <li><img src="{% static 'pic/show_pic/show_2.jpg' %}" alt="2"></li>
+            <li><img src="{% static 'pic/show_pic/show_4.jpg' %}" alt="3"></li>
+{#            <li><img src="{% static 'pic/show_pic/show_4.jpg' %}" alt="4"></li>#}
+{#            <li><img src="{% static 'pic/show_pic/show_5.jpg' %}" alt="5"></li>#}
+{#            <li><img src="{% static 'pic/show_pic/show_6.jpg' %}" alt="6"></li>#}
+{#            <li><img src="{% static 'pic/show_pic/show_7.png' %}" alt="7"></li>#}
+        </ul>
+        <ol id="button_list"> <!-- 轮播按钮 -->
+            <li class="first-li" id="olli1">1</li>
+            <li id="olli2">2</li>
+            <li id="olli3">3</li>
+{#            <li id="olli4">4</li>#}
+{#            <li id="olli5">5</li>#}
+{#            <li id="olli6">6</li>#}
+{#            <li id="olli7">7</li>#}
+        </ol>
+    </div>
+<div class="clearfix">
+    <div class="list-group" style="margin-top: 50px; margin-left: 15%; margin-right: 10%; float: left; width: 30%">
+      <a class="list-group-item active">
+        新手指南
+      </a>
+      <a href="http://scuacm.xyz/doku.php?id=wiki:beginner:guide" class="list-group-item">XCPC入门</a>
+      <a href="http://scuacm.xyz/doku.php?id=wiki:beginner:advice" class="list-group-item">集训队选手向对算法竞赛感兴趣的同学的建议</a>
+      <a href="https://space.bilibili.com/1249126794" class="list-group-item">B站关注SCUACM每日一题</a>
+        <a href="http://scuacm.xyz/doku.php?id=Home" class="list-group-item">了解更多</a>
+    </div>
+
+    <div class="list-group" style="margin-top: 50px; margin-left: 0; margin-right: 10%; float: left; width: 30%">
+      <a class="list-group-item active">
+        相关网站
+      </a>
+      <a href="https://scuacm.xyz/doku.php?id=Home" class="list-group-item">四川大学程序设计协会/集训队</a>
+      <a href="https://icpc.pku.edu.cn/index.htm" class="list-group-item">比赛通知-ICPC北京总部</a>
+      <a href="https://ucup.ac/" class="list-group-item">训练网站-Universal Cup</a>
+      <a href="https://codeforces.com/" class="list-group-item">训练网站-codeforces</a>
+    </div>
+</div>
+
+<div class="container">
+    <span style="font-size: 20px"></span>
+
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          队伍排名
+      </div>
+
+      <!-- Table -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+              <th>排名</th>
+            <th>队名</th>
+            <th>队员</th>
+              <th>ICPC网络赛1</th>
+              <th>ICPC网络赛2</th>
+              <th>CCPC网络赛</th>
+              <th>周末训练1</th>
+              <th>周末训练2</th>
+              <th>周末训练3</th>
+              <th>周末训练4</th>
+              <th>周末训练5</th>
+              <th>周末训练6</th>
+              <th>周末训练7</th>
+              <th>总分</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in team_set %}
+          <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{obj.teamname}}</td>
+
+              <td>
+                  {% for user in user_list %}
+                        {% if user.team_id == obj.id %}
+                          <!-- 如果条件为真，执行此处的 HTML 代码 -->
+                            <a href="/user_homepage/{{ user.username }}">{{ user.name }}</a>
+                        {% endif %}
+
+                  {% endfor %}
+              </td>
+                  <td>{{obj.score1}}</td>
+                  <td>{{obj.score2}}</td>
+                  <td>{{obj.score3}}</td>
+                  <td>{{obj.score4}}</td>
+                  <td>{{obj.score5}}</td>
+                  <td>{{obj.score6}}</td>
+                  <td>{{obj.score7}}</td>
+                  <td>{{obj.score8}}</td>
+                  <td>{{obj.score9}}</td>
+                  <td>{{obj.score10}}</td>
+                  <td>{{obj.score}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<footer style="height: 10%;">
+        <p>Copyright © 2023 By <a href="https://scu.edu.cn" title="学校官网" target="_blank">Sichuan University</a>.</p>
+    </footer>
+</body>
+

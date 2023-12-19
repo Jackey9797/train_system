@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>集训中心</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'pic/scu.ico' %}" sizes="16x16">
+    <style>
+        .navbar {
+            padding-left: 150px;
+            padding-right: 150px;
+            margin-bottom: 0;
+            background-color: #ffffff;
+        }
+        body{
+            min-height: 100vh;
+            background-color: rgb(221, 221, 221)
+        }
+        footer {
+            color: #fff;
+            padding: 1em 0;
+            position: relative;
+            bottom: 0;
+            text-align: center;
+            background: #72655b;
+            width: 100%;
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="navbar navbar-default" style="font-size: 16px">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'pic/SCU.png' %}" style="width: 30px;">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home">首页</a></li>
+                <li><a href="/collection">题目收藏<span class="sr-only">(current)</span></a></li>
+                <li><a href="/application">入队选拔报名</a></li>
+                <li><a href="/feedback">反馈</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span>菜单</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_homepage">个人信息</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="container" style="margin-top: 50px">
+    <span style="font-size: 20px"></span>
+
+    {% if user_info.is_admin == 1 %}
+    <div style="margin-bottom: 10px">
+      <a class="btn btn-success" href="/contest/add" target="_blank">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          新建比赛
+      </a>
+    </div>
+    {% endif %}
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          比赛
+      </div>
+
+      <!-- Table -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>比赛名称</th>
+            <th>比赛日期</th>
+            <th>比赛网址</th>
+              <th>比赛描述</th>
+              <th>比赛题解</th>
+              <th>排行榜</th>
+              <th>比赛讨论区</th>
+              {% if user_info.is_admin == 1 %}
+              <th>操作</th>
+              {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in cts_set %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{obj.name}}</td>
+            <td>{{obj.date}}</td>
+            <td><a href={{obj.site}}>点击跳转</a></td>
+              <td><a href={{obj.statement}}>点击跳转</a></td>
+              <td><a href={{obj.solution}}>点击跳转</a></td>
+              <td><a href={{obj.scoreboard}}>点击跳转</a></td>
+              <td><a href="/discussion/?id={{ obj.id }}">点击跳转</a></td>
+              {% if user_info.is_admin == 1 %}
+              <td>
+                  <a class="btn btn-primary btn-xs" href="/contest/{{ obj.id }}/edit/">编辑</a>
+                  <a class="btn btn-danger btn-xs" href="/contest/delete/?nid={{ obj.id }}">删除</a>
+              </td>
+              {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<div class="container">
+    <span style="font-size: 20px"></span>
+
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          队伍排名
+      </div>
+
+      <!-- Table -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+              <th>排名</th>
+            <th>队名</th>
+            <th>队员</th>
+              <th>ICPC网络赛1</th>
+              <th>ICPC网络赛2</th>
+              <th>CCPC网络赛</th>
+              <th>周末训练1</th>
+              <th>周末训练2</th>
+              <th>周末训练3</th>
+              <th>周末训练4</th>
+              <th>周末训练5</th>
+              <th>周末训练6</th>
+              <th>周末训练7</th>
+              <th>总分</th>
+              {% if user_info.is_admin == 1 %}
+            <th>操作</th>
+              {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in team_set %}
+          <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{obj.teamname}}</td>
+
+              <td>
+                  {% for user in user_list %}
+                        {% if user.team_id == obj.id %}
+                          <!-- 如果条件为真，执行此处的 HTML 代码 -->
+                            <a href="/user_homepage/{{ user.username }}">{{ user.name }}</a>
+                        {% endif %}
+
+                  {% endfor %}
+              </td>
+                  <td>{{obj.score1}}</td>
+                  <td>{{obj.score2}}</td>
+                  <td>{{obj.score3}}</td>
+                  <td>{{obj.score4}}</td>
+                  <td>{{obj.score5}}</td>
+                  <td>{{obj.score6}}</td>
+                  <td>{{obj.score7}}</td>
+                  <td>{{obj.score8}}</td>
+                  <td>{{obj.score9}}</td>
+                  <td>{{obj.score10}}</td>
+
+                  <td>{{obj.score}}</td>
+          {% if user_info.is_admin == 1 %}
+              <td>
+                  <a class="btn btn-primary btn-xs" href="/rating/{{ obj.id }}/edit/">编辑</a>
+              </td>
+          {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<footer style="height: 10%;">
+        <p>Copyright © 2023 By <a href="https://scu.edu.cn" title="学校官网" target="_blank">Sichuan University</a>.</p>
+    </footer>
+<script src="{% static 'jQuery.js' %}"></script>
+<script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

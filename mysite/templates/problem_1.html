@@ -1,0 +1,187 @@
+<!--{% load static %}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>题目系统</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="icon" href="{% static 'pic/scu.ico' %}" sizes="16x16">
+    <style>
+        .mybtn{
+            text-align: center;
+        }
+        .mycountainer{
+            padding:20px 40px;
+            border:1px solid #dddddd;
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+            background-color: rgb(240, 240, 240);
+        }
+        .demo{
+
+                position:fixed;
+
+                top: 0;
+
+                left: 0;
+
+                width:100%;
+
+                height:100%;
+
+                min-width: 1000px;
+
+                z-index:-10;
+
+                zoom: 1;
+
+                background-color: #fff;
+
+                {#background: url(/static/pic/coolbackground2.png);#}
+
+                background-repeat: no-repeat;
+
+                background-size: cover;
+
+                -webkit-background-size: cover;
+
+                -o-background-size: cover;
+
+                background-position: center 0;
+
+            }
+        .sample-wrap{
+                overflow: hidden;
+                display: flex;
+            }
+        .sample{
+            margin-top: 1.5em;
+            }
+        .input{
+            margin-right: .5em;
+            flex: 1;
+            overflow: hidden;
+            }
+        .output{
+            margin-right: .5em;
+            flex: 1;
+            overflow: hidden;
+            }
+    </style>
+
+</head>
+<body>
+
+<div class="demo"></div>
+<div class="navbar navbar-default" style="font-size: 16px">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'pic/SCU.png' %}" style="width: 30px;">
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">首页</a></li>
+                <li class="active"><a href="/problem">题目系统<span class="sr-only">(current)</span></a></li>
+                <li><a href="/collection">题目收藏</a></li>
+                <li><a href="/feedback">反馈</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span>菜单</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_homepage/{{ username }}">个人信息</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="mycountainer" style="width: 80%; margin-left: 10%">
+    <span style="font-size: 20px"></span>
+
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Panel heading</div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>题目名</th>
+            <th style="width: 80px">难度等级</th>
+            <th style="width: 80px">标签</th>
+              <th>题面</th>
+              <th>题解</th>
+              <th>讨论区</th>
+              <th>来源</th>
+              <th>收藏</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj, pro_col in pro_set %}
+          <tr>
+            <th scope="row">{{obj.id}}</th>
+            <td>{{obj.name}}</td>
+            <td>{{obj.difficulty}}</td>
+            <td>{{obj.tag}}</td>
+              <td><a href={{obj.statement}}>点击跳转</a></td>
+              <td><a href={{obj.solution}}>点击跳转</a></td>
+              <td><a href="/discussion/?id={{ obj.id }}">点击跳转</a></td>
+              <td>{{obj.source}}</td>
+              {% if pro_col == 1%}
+                  <td><button class="btn btn-warning" onclick="unfavorite({{ obj.id }})">取消</button></td>
+              {% else %}
+                  <td><button class="btn btn-primary" onclick="favorite({{ obj.id }})">收藏</button></td>
+              {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+<script>
+    {% if flag == 0 %}
+        flag = 1
+        window.location.reload();
+    {% endif %}
+    function favorite(pro_id) {
+        $.post("/favorite_pro/", { pro_id: pro_id }, function(data) {
+        // 在请求成功时，data 参数将包含服务器返回的数据
+        console.log("服务器返回的ID为：" + data.id);
+        }, "json");
+    }
+
+    function unfavorite(pro_id) {
+        $.post("/unfavorite_pro/", { pro_id: pro_id }, function(data) {
+        // 在请求成功时，data 参数将包含服务器返回的数据
+        console.log("服务器返回的ID为：" + data.id);
+        }, "json");
+    }
+</script>
+
+<script src="{% static 'jQuery.js' %}"></script>
+<script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

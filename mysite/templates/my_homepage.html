@@ -1,0 +1,257 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+    <meta name="theme-color" content="#ffc91d"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static "bootstrap-3.4.1-dist/css/bootstrap.css"%}">
+{#    <link href="{% static "bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css"%}" rel="stylesheet" type="text/css"/>#}
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{% static "kico.css"%}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "paul.css"%}" rel="stylesheet" type="text/css"/>
+    <link rel="icon" href="{%  static "/pic/scu.ico"%}" sizes="16x16">
+    <style>
+        html, body{
+            height: 100%;
+            margin: 0;
+        }
+
+        .basic_name{
+            float: left;
+            /* margin: 2em auto;  */
+            transition: transform 0.5s;
+            padding-left: 5%;
+        }
+
+        .basic_name p{
+            line-height: 120px;
+            color: rgb(255, 255, 255);
+        }
+
+        .basic_name a{
+            line-height: 120px;
+            color: red;
+            text-decoration: underline red;
+        }
+
+        .rdborder{
+            width: 100%;
+            /* height: 100px; */
+            border: 2px solid rgb(129, 96, 163);
+            border-radius: 15px ;
+            background-color: rgba(224, 208, 59, 0.35);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100%;
+        }
+
+        .wrap .title{
+            padding-top: 15px;
+        }
+
+        .hide{
+          display: none;
+        }
+
+        #mod_info input{
+          margin-top: 5px;
+        }
+        .navbar {
+            padding-left: 150px;
+            padding-right: 150px;
+            margin-bottom: 0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+
+<body>
+<div class="navbar navbar-default" style="margin-bottom: 0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home">
+                <img src="{% static 'pic/SCU.png' %}" style="width: 30px;">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">首页</a></li>
+                <li><a href="/collection">题目收藏 <span class="sr-only">(current)</span></a></li>
+                <li><a href="/application">入队选拔报名</a></li>
+                <li><a href="/feedback">反馈</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span>菜单</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user_homepage/{{ username }}">个人信息</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <container style="height: 100%;">
+        <div style="height: 100%; width: 75%; float: left; background: #4b4b4b;">
+            <section id="basic_info" style="height: 20%; padding-left: 5%;">
+                <div class="avatar" style="float: left;">
+                     <img src="{% static "img/me.jpg"%}" title="Chien_W"/>
+                </div>
+                <div class="basic_name">
+                    <p>{{ user_info.username }}</p>
+                </div>
+                <div class="basic_name">
+                  {%if team_info == None %}
+                    <p>暂无队伍</p>
+                  {% else %}
+                    <p>所在队伍： {{team_info.teamname}}</p>
+                  {%endif%}
+                </div>
+                <div class="basic_name">
+                  {%if team_info == None %}
+                    <p></p>
+                  {% else %}
+                    <a href="/teams">队伍排名： {{team_info.rank}} / {{team_num}}</a>
+                  {%endif%}
+                </div>
+                <div style="clear: both;"> </div>
+            </section>
+            <section id="info" style="min-height: 40%;">
+                <div class="wrap">
+                    <h5 class="title">基本信息 <span><button type="button" class="button" onclick="ModifyInfo()">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                  </button></span></h5>
+                    <div class="rdborder">
+                        <div class="row" >
+                            <div class="col-l-6" id='info1'>
+                                <p>姓名：{{user_info.name}}</p>
+                                <p>性别：{{user_info.gender}}</p>
+                                <p>年龄：{{user_info.age}}</p>
+                                <p>专业：{{user_info.major}}</p>
+                            </div>
+                            <div class="col-l-6" id='info2'>
+                                <p>QQ：{{user_info.qq}}</p>
+                                <p>GitHub：<a href="https://github.com/Chien-W">{{user_info.github}}</a></p>
+                                <p>博客：<a href="https://www.oyyandwjw.cn">{{user_info.blog}}</a></p>
+                                <p>邮箱：<a href="mailto:764012358@qq.com">{{user_info.mail}}</a></p>
+                            </div>
+                            <div class="col-l-12 hide" id='mod_info'>
+                              <form method="post" action="/post/info/">
+                                <div class="row" >
+                                <div class="col-l-6">
+                                <input class="form-control" type="text" placeholder="姓名" aria-label="default input example" name="name" value="{{ user_info.name }}">
+                                <input class="form-control" type="text" placeholder="性别" aria-label="default input example" name="gender" value="{{ user_info.gender }}">
+                                <input class="form-control" type="text" placeholder="年龄" aria-label="default input example" name="age" value="{{ user_info.age }}">
+                                <input class="form-control" type="text" placeholder="专业" aria-label="default input example" name="major" value="{{ user_info.major }}">
+                            </div>
+                            <div class="col-l-6">
+                              <input class="form-control" type="text" placeholder="QQ" aria-label="default input example" name="qq" value="{{ user_info.qq }}">
+                              <input class="form-control" type="text" placeholder="Github链接" aria-label="default input example" name="github" value="{{ user_info.github }}">
+                              <input class="form-control" type="text" placeholder="博客地址" aria-label="default input example" name="blog" value="{{ user_info.blog }}">
+                              <input class="form-control" type="text" placeholder="邮箱地址" aria-label="default input example" name="mail" value="{{ user_info.mail }}">
+                            </div>
+                          </div>
+                              <button type="submit" class="btn btn-primary" style="margin-top: 5px; float:right">提交</button>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="info" style="min-height: 40%;">
+                <div class="wrap"  style=" padding-bottom: 15px; min-height: 60%;">
+                    <h5 class="title">自我介绍 <span><button type="button" class="button" onclick="ModifySelfintro()">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                  </button></span>
+                    </h5>
+                    <div class='rdborder' style="margin-top: 15px;">
+                        <p id="info3">{{user_info.selfintroduction}}</p>
+                        <form class="hide" id='mod_intro' method="post" action="/post/introduction/">
+                          <textarea class="form-control" id="exampleFormControlTextarea1" name="self_introduction" rows="3">{{ user_info.selfintroduction }}</textarea>
+                          <button type="submit" class="btn btn-primary" style="margin-top: 5px; float:right">提交</button>
+                          <div style="clear:both"> </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </section>
+
+        </div>
+{#            </div style="float:left;">#}
+                <div>
+                    <button type="button" class="btn btn-primary btn-lg" style="float: left; min-width: 12.5%;" onclick="ShowProblemInfo()">收藏题目</button>
+                    <button type="button" class="btn btn-secondary btn-lg" style=" min-width: 12.5%" onclick="ShowDiscussInfo()">发布讨论</button>
+                    <!-- <div style="clear: both;"></div> -->
+                </div>
+                <div class="list-group" id="problem_list" style="height: 90%; overflow-y: auto;">
+                  {%for obj in pro_col%}
+                      </a><a href="{{ obj.url }}" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">{{obj.name}}  {{ obj.tag }}</h5>
+                        </div>
+                      </a>
+                      {%endfor %}
+                </div>
+                <div class="list-group hide" id="discuss_list" style="height: 90%; overflow-y: auto;">
+                  {%for obj in dis_set%}
+                      </a><a href="/discussion?id={{ obj.discussionCon }}" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">{{ obj.discussionCon.date }}  {{ obj.discussionCon.name }}</h5>
+                        </div>
+                        <p class="mb-1">{{obj.Contents}}</p>
+                      </a>
+                      {%endfor %}
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+        </container>
+
+    <footer style="height: 10%;">
+        <p>Copyright © 2023 By <a href="https://scu.edu.cn" title="学校官网" target="_blank">Sichuan University</a>.</p>
+    </footer>
+<script src="{% static "bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.js"%}" ></script>
+<script src="https://kit.fontawesome.com/07bfebd94a.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+<script>
+  function ModifyInfo() {
+    $(info1).addClass("hide");
+    $(info2).addClass("hide");
+    $(mod_info).removeClass("hide");
+  }
+  function ModifySelfintro() {
+    $(info3).addClass("hide");
+    $(mod_intro).removeClass("hide");
+  }
+  function ShowDiscussInfo() {
+    $(problem_list).addClass("hide");
+    $(discuss_list).removeClass("hide");
+  }
+  function ShowProblemInfo() {
+    $(discuss_list).addClass("hide");
+    $(problem_list).removeClass("hide");
+  }
+
+</script>
+</body>
+</html>
