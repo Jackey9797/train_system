@@ -64,7 +64,7 @@
 4. 启动应用程序：
 
     ```bash
-     runserver --insecure 0.0.0.0:8000
+    python manage.py runserver --insecure 0.0.0.0:8000
     ```
 
 ## 配置
