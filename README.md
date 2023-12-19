@@ -7,7 +7,7 @@
 1. 使用以下命令从GitHub克隆仓库：
 
     ```bash
-    git clone [https://github.com/yourusername/yourproject.git](https://github.com/Jackey9797/train_system.git)
+    git clone https://github.com/Jackey9797/train_system.git
     ```
 
 2. 进入项目目录：
@@ -19,7 +19,7 @@
 3. 安装依赖：
 
     ```bash
-    npm install
+    pip install -r requirements.txt
     ```
 
 4. 启动应用程序：
